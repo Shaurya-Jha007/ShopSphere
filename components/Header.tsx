@@ -6,10 +6,6 @@ import { PackageIcon, TrolleyIcon } from "@sanity/icons";
 export default function Header() {
   const { user } = useUser();
 
-  const createClerkPasskey = async function () {
-    await user?.createPasskey();
-  };
-
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
       <div className="flex w-full flex-wrap justify-between items-center">
@@ -59,15 +55,6 @@ export default function Header() {
               </div>
             ) : (
               <SignInButton mode="modal" />
-            )}
-
-            {user?.passkeys.length === 0 && (
-              <button
-                onClick={createClerkPasskey}
-                className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border"
-              >
-                Create passkey
-              </button>
             )}
           </ClerkLoaded>
         </div>
