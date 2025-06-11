@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  createCheckoutSession,
+  Metadata,
+} from "@/actions/createCheckoutSession";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
@@ -23,6 +27,16 @@ export default function BasketPage() {
     setIsLoading(true);
 
     try {
+      const metadata: Metadata = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.fullName ?? "Unknown",
+        customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+        clerkUserId: user!.id,
+      };
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -79,7 +93,7 @@ export default function BasketPage() {
                     {item.product.name}
                   </h2>
                   <p className="text-sm sm:text-base">
-                    Price: ₹
+                    Price: $
                     {((item.product.price ?? 0) * item.quantity).toFixed(2)}
                   </p>
                 </div>
@@ -102,7 +116,7 @@ export default function BasketPage() {
             <p className="flex justify-between text-2xl font-bold border-t pt-2">
               <span>Total:</span>
               <span>
-                ₹{useBasketStore.getState().getTotalPrice().toFixed(2)}
+                ${useBasketStore.getState().getTotalPrice().toFixed(2)}
               </span>
             </p>
           </div>
