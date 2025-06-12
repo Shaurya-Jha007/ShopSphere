@@ -37,7 +37,7 @@ export default function ProductThumb({ product }: { product: ProductType }) {
               : "No description available"
           )}
         </p>
-        <p>₹{product.price?.toFixed(2)}</p>
+        <p>${product.price?.toFixed(2)}</p>
       </div>
     </Link>
   );
