@@ -29,7 +29,7 @@ const useBasketStore = create<BasketState>()(
           if (existingItem) {
             return {
               items: state.items.map((item) =>
-                item.product._id
+                item.product._id === product._id
                   ? { ...item, quantity: item.quantity + 1 }
                   : item
               ),
