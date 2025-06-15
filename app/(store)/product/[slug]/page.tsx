@@ -20,7 +20,7 @@ export default async function ProductPage({
     return notFound();
   }
 
-  const isOutOfStock = product.stock !== null && product.stock <= 0;
+  const isOutOfStock = product.stock != null && product.stock <= 0;
 
   return (
     <section className="container mx-auto px-4 py-8">
@@ -55,7 +55,7 @@ export default async function ProductPage({
             </div>
           </div>
           <div className="mt-6">
-            <AddToBasketButton product={product} isDisabled={isOutOfStock} />
+            <AddToBasketButton product={product} disabled={isOutOfStock} />
           </div>
         </div>
       </div>

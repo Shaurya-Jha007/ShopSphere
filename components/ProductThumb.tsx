@@ -1,10 +1,11 @@
-import { imageUrl } from "@/lib/imageUrl.ts";
+import { imageUrl } from "@/lib/imageUrl";
 import { ProductType } from "@/sanity.types";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductThumb({ product }: { product: ProductType }) {
-  const isOutOfStock = product.stock !== null && product.stock <= 0;
+  const isOutOfStock =
+    product.stock !== undefined && product.stock !== null && product.stock <= 0;
   return (
     <Link
       href={`/product/${product.slug?.current}`}

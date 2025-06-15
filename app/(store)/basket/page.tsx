@@ -99,7 +99,7 @@ export default function BasketPage() {
                 </div>
               </div>
               <div className="flex items-center ml-4 flex-shrink-0">
-                <AddToBasketButton product={item.product} />
+                <AddToBasketButton disabled={false} product={item.product} />
               </div>
             </div>
           ))}
